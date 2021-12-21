@@ -1,0 +1,6 @@
+HLA-VBSeq commands:
+
+0. extract reads (see the commands on the website)
+1. java -jar /.mounts/labs/gsi/modulator/sw/Ubuntu18.04/hla-vbseq-1/bin/bamNameIndex.jar search data/TGL01_X022_Ov_M_PE_302_WT.Aligned.sortedByCoord.out.bam --name data/TEST_reads.txt --output data/TEST_partia
+l.sam
+2. java -jar /.mounts/labs/gsi/modulator/sw/Ubuntu18.04/hla-vbseq-1/bin/bamNameIndex.jar index data/TGL01_X022_Ov_M_PE_302_WT.Aligned.sortedByCoord.out.bam --indexFile data/TGL01_X022_Ov_M_PE_302_WT.Aligned.sortedByCoord.out.bam.idx

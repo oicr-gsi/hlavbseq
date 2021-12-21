@@ -1,0 +1,105 @@
+[
+    {
+        "arguments": {
+            "hlavbseq.cnvFile": {
+                "contents": {
+                    "configuration": "/.mounts/labs/gsi/testdata/hlavbseq/input_data/VARTEST.copynumber",
+                    "externalIds": [
+                        {
+                            "id": "TEST",
+                            "provider": "TEST"
+                        }
+                    ]
+                },
+                "type": "EXTERNAL"
+            },
+            "hlavbseq.formatJson.height": null,
+            "hlavbseq.formatJson.jobMemory": 6,
+            "hlavbseq.formatJson.modules": null,
+            "hlavbseq.formatJson.rScript": null,
+            "hlavbseq.formatJson.hlavbseqRmd": null,
+            "hlavbseq.formatJson.summaryPlotScript": null,
+            "hlavbseq.formatJson.width": null,
+            "hlavbseq.gammaRange": null,
+            "hlavbseq.outputFileNamePrefix": "TESTING",
+            "hlavbseq.preprocessInputs.jobMemory": 4,
+            "hlavbseq.preprocessInputs.modules": null,
+            "hlavbseq.preprocessInputs.preprocessScript": null,
+            "hlavbseq.preprocessInputs.rScript": null,
+            "hlavbseq.preprocessInputs.timeout": null,
+            "hlavbseq.runSequenza.cancerType": null,
+            "hlavbseq.runSequenza.female": null,
+            "hlavbseq.runSequenza.genomeSize": null,
+            "hlavbseq.runSequenza.jobMemory": 6,
+            "hlavbseq.runSequenza.minReadsBaf": null,
+            "hlavbseq.runSequenza.minReadsNormal": null,
+            "hlavbseq.runSequenza.modules": null,
+            "hlavbseq.runSequenza.ploidyFile": "$SEQUENZA_RES_ROOT/PANCAN_ASCAT_ploidy_prob.Rdata",
+            "hlavbseq.runSequenza.rScript": null,
+            "hlavbseq.runSequenza.reference": null,
+            "hlavbseq.runSequenza.hlavbseqScript": null,
+            "hlavbseq.runSequenza.timeout": null,
+            "hlavbseq.runSequenza.windowSize": null,
+            "hlavbseq.snpFile": {
+                "contents": {
+                    "configuration": "/.mounts/labs/gsi/testdata/hlavbseq/input_data/VARTEST.snp",
+                    "externalIds": [
+                        {
+                            "id": "TEST",
+                            "provider": "TEST"
+                        }
+                    ]
+                },
+                "type": "EXTERNAL"
+            }
+        },
+        "description": "Sequenza workflow test",
+        "engineArguments": {
+           "write_to_cache": false,
+           "read_from_cache": false
+        },
+        "id": "VARSCAN_OUTPUTS_PCSI_CHR22",
+        "metadata": {
+            "hlavbseq.gammaMarkdownPdf": {
+                "contents": [
+                    {
+                        "outputDirectory": "@SCRATCH@/@DATE@_Workflow_hlavbseq_VARSCAN_OUTPUTS_PCSI_CHR22_@JENKINSID@"
+                    }
+                ],
+                "type": "ALL"
+            },
+            "hlavbseq.gammaSummaryPlot": {
+                "contents": [
+                    {
+                        "outputDirectory": "@SCRATCH@/@DATE@_Workflow_hlavbseq_VARSCAN_OUTPUTS_PCSI_CHR22_@JENKINSID@"
+                    }
+                ],
+                "type": "ALL"
+            },
+            "hlavbseq.resultJson": {
+                "contents": [
+                    {
+                        "outputDirectory": "@SCRATCH@/@DATE@_Workflow_hlavbseq_VARSCAN_OUTPUTS_PCSI_CHR22_@JENKINSID@"
+                    }
+                ],
+                "type": "ALL"
+            },
+            "hlavbseq.resultZip": {
+                "contents": [
+                    {
+                        "outputDirectory": "@SCRATCH@/@DATE@_Workflow_hlavbseq_VARSCAN_OUTPUTS_PCSI_CHR22_@JENKINSID@"
+                    }
+                ],
+                "type": "ALL"
+            }
+        },
+        "validators": [
+            {
+                "metrics_calculate": "@CHECKOUT@/tests/calculate.sh",
+                "metrics_compare": "@CHECKOUT@/tests/compare.sh",
+                "output_metrics": "/.mounts/labs/gsi/testdata/hlavbseq/output_metrics/VARSCAN_OUTPUTS_PCSI_CHR22.metrics",
+                "type": "script"
+            }
+        ]
+    }
+]
