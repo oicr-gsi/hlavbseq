@@ -1,6 +1,74 @@
-HLA-VBSeq commands:
+## Commands
+This section lists command(s) run by HLA-VBseq workflow
 
-0. extract reads (see the commands on the website)
-1. java -jar /.mounts/labs/gsi/modulator/sw/Ubuntu18.04/hla-vbseq-1/bin/bamNameIndex.jar search data/TGL01_X022_Ov_M_PE_302_WT.Aligned.sortedByCoord.out.bam --name data/TEST_reads.txt --output data/TEST_partia
-l.sam
-2. java -jar /.mounts/labs/gsi/modulator/sw/Ubuntu18.04/hla-vbseq-1/bin/bamNameIndex.jar index data/TGL01_X022_Ov_M_PE_302_WT.Aligned.sortedByCoord.out.bam --indexFile data/TGL01_X022_Ov_M_PE_302_WT.Aligned.sortedByCoord.out.bam.idx
+* Running HLA-VBseq
+
+At this point, workflow uses a filtering step for alignments (removing secondary hits) which is not a part of the standard way to run this tool. It may be resolved in a future, but since the authors did not publish the source code it may require direct communication with them to clarify some issues. The workflow produces reports as expected, though filtering of reads may distort the assessment of HLA alleles.
+
+###Extracting reads which overlap HLA alleles:
+
+```
+ samtools view ~{inputBam} ~{hlaIntervals} | awk '{print $1}' | sort | uniq > ~{outputFileNamePrefix}_HLA-VBSeq_reads.txt
+
+```
+
+###Indexing bam file with HLA-VBseq and extracting HLA reads into a .sam file
+
+```
+ set -euo pipefail
+ unset _JAVA_OPTIONS
+ mkdir data
+ ln -s ~{inputBam} -t data
+ java -Xmx~{javaMemory}G -jar ~{bamNameIndexJar} index data/~{fileName}  --indexFile data/~{fileName}.idx
+ java -Xmx~{javaMemory}G -jar ~{bamNameIndexJar} search data/~{fileName} --name ~{hlaReads} --output ~{outputFileNamePrefix}_partial.sam
+```
+
+###Extract reads into fastq files, both for HLA-specific and unmapped reads. Merge.
+
+```
+ set -euo pipefail
+ unset _JAVA_OPTIONS
+ java -Xmx~{javaMemory}G -jar $PICARD_ROOT/picard.jar SamToFastq I=~{partialSam} F=PARTIAL_1.fastq F2=PARTIAL_2.fastq
+ samtools view -bh -f 12 ~{inputBam} > ~{outputFileNamePrefix}.sorted_unmapped.bam
+ java -Xmx~{javaMemory}G -jar $PICARD_ROOT/picard.jar SamToFastq I=~{outputFileNamePrefix}.sorted_unmapped.bam F=UNMAPPED_1.fastq F2=UNMAPPED_2.fastq
+ cat PARTIAL_1.fastq UNMAPPED_1.fastq | gzip -c > ~{outputFileNamePrefix}_part_1.fastq.gz
+ cat PARTIAL_2.fastq UNMAPPED_2.fastq | gzip -c > ~{outputFileNamePrefix}_part_2.fastq.gz
+
+```
+
+###Filter alignments (the default is to remove secondary alignments)
+
+```
+ samtools view -h -F ~{filterTag} ~{inputBam} -b > ~{fBam}
+```
+
+###Run the analysis with HLA-VBseq, call HLA alleles
+
+```
+ set -euo pipefail
+ unset _JAVA_OPTIONS
+ java -jar -Xmx~{javaMemory}g -Xms~{javaMemory}g ~{hlavbseqJar} \
+                           ~{hlaFasta} \
+                           ~{inputBam} \
+                           ~{outputFileNamePrefix}_HLA-VBSeq_results.txt  \
+                           --alpha_zero ~{alphaZero} \
+                           --is_paired 
+```
+
+```
+ ~{parsingScript} ~{alleleFile} \
+                  ~{resultsFile} > \
+                  ~{outputFileNamePrefix}_HLA-VBSeq_prediction.txt
+```
+
+###Post-processing of the results
+
+```
+ python3 ~{callingScript} \
+     -v ~{resultsFile} \
+     -a ~{alleleFile} \
+     -r ~{meanReadLength} \
+     -d ~{resolution} \
+     --ispaired > \
+     ~{outputFileNamePrefix}_HLA-VBSeq_call.txt
+```

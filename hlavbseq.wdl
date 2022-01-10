@@ -76,9 +76,10 @@ call callHlaDigits {
 
 parameter_meta {
   inputBam: "BWA aligned reads."
+  inputBai: "index for BWA aligned reads."
   filterTag: "To address the issue with some data, we use 256 (secondary alignment) as a default"
-  runBwaMem_threads: "Threads to use with BWA aligner."
-  runBwaMem_addParam: "HLAVBSeq uses additional parameters for BWA which need to be specified."
+  bwa_threads: "Threads to use with BWA aligner."
+  add_params: "HLAVBSeq uses additional parameters for BWA which need to be specified."
   outputFileNamePrefix: "Output prefix, customizable. Default is the first file's basename."
 }
 
@@ -264,10 +265,10 @@ input {
   String modules = "samtools/1.9"
 }
 
-String filteredBam = basename(inputBam, ".bam") + "filtered.bam"
+String fBam = basename(inputBam, ".bam") + ".filtered.bam"
 
 command <<<
- samtools view -h -F ~{filterTag} ~{inputBam} -b > ~{filteredBam}
+ samtools view -h -F ~{filterTag} ~{inputBam} -b > ~{fBam}
 >>>
 
 parameter_meta {

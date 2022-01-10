@@ -1,9 +1,62 @@
 [
     {
         "arguments": {
-            "hlavbseq.cnvFile": {
+            "hlavbseq.add_params": "-P -L 10000 -a",
+	    "hlavbseq.bwaMem.adapter1": null,
+	    "hlavbseq.bwaMem.adapter2": null,
+	    "hlavbseq.bwaMem.adapterTrimming_addParam": null,
+	    "hlavbseq.bwaMem.adapterTrimming_jobMemory": null,
+	    "hlavbseq.bwaMem.adapterTrimmingLog_jobMemory": null,
+	    "hlavbseq.bwaMem.adapterTrimmingLog_timeout": null,
+	    "hlavbseq.bwaMem.adapterTrimming_modules": null,
+	    "hlavbseq.bwaMem.adapterTrimming_timeout": null,
+	    "hlavbseq.bwaMem.bamMerge_jobMemory": null,
+	    "hlavbseq.bwaMem.bamMerge_modules": null,
+	    "hlavbseq.bwaMem.bamMerge_timeout": null,
+	    "hlavbseq.bwaMem.countChunkSize_jobMemory": 16,
+	    "hlavbseq.bwaMem.countChunkSize_timeout": null,
+	    "hlavbseq.bwaMem.doTrim": false,
+	    "hlavbseq.bwaMem.indexBam_jobMemory": null,
+	    "hlavbseq.bwaMem.indexBam_modules": null,
+	    "hlavbseq.bwaMem.indexBam_timeout": null,
+	    "hlavbseq.bwaMem.numChunk": null,
+	    "hlavbseq.bwaMem.readGroups": "'@RG\\tID:000000_A00469_0077_BHNGLTDSXX_GGGGGGGGG-GGGGGGGG_2\\tLB:HLAVBSEQ_TEST_T\\tPL:ILLUMINA\\tPU:000000_A00469_0077_BHNGLTDSXX_GGGGGGGGG-GGGGGGGG_2\\tSM:HLAVBSEQ_TEST_T'",
+	    "hlavbseq.bwaMem.runBwaMem_bwaRef": "$HLAVBSEQ_BWA_INDEX_ROOT/hla_all_v2.fasta",
+	    "hlavbseq.bwaMem.runBwaMem_jobMemory": 32,
+	    "hlavbseq.bwaMem.runBwaMem_modules": "hlavbseq-bwa-index/2.0",
+	    "hlavbseq.bwaMem.runBwaMem_timeout": null,
+	    "hlavbseq.bwaMem.slicerR1_jobMemory": null,
+	    "hlavbseq.bwaMem.slicerR1_modules": null,
+	    "hlavbseq.bwaMem.slicerR1_timeout": null,
+	    "hlavbseq.bwaMem.slicerR2_jobMemory": null,
+	    "hlavbseq.bwaMem.slicerR2_modules": null,
+	    "hlavbseq.bwaMem.slicerR2_timeout": null,
+	    "hlavbseq.bwaMem.trimMinLength": null,
+	    "hlavbseq.bwaMem.trimMinQuality": null,
+	    "hlavbseq.bwa_threads": "8",
+	    "hlavbseq.callHlaDigits.alleleFile": "$HLAVBSEQ_BWA_INDEX_ROOT/Allelelist.txt",
+	    "hlavbseq.callHlaDigits.callingScript": "$HLA_VBSEQ_ROOT/bin/call_hla_digits.py",
+	    "hlavbseq.callHlaDigits.jobMemory": null,
+	    "hlavbseq.callHlaDigits.meanReadLength": null,
+	    "hlavbseq.callHlaDigits.modules": "hla-vbseq/1 hlavbseq-bwa-index/2.0",
+	    "hlavbseq.callHlaDigits.resolution": null,
+	    "hlavbseq.callHlaDigits.timeout": null,
+	    "hlavbseq.extractReads.hlaIntervals": null,
+	    "hlavbseq.extractReads.jobMemory": null,
+	    "hlavbseq.extractReads.modules": null,
+	    "hlavbseq.extractReads.timeout": null,
+	    "hlavbseq.filterBam.jobMemory": null,
+	    "hlavbseq.filterBam.modules": null,
+	    "hlavbseq.filterBam.timeout": null,
+	    "hlavbseq.filterTag": null,
+	    "hlavbseq.indexBam.bamNameIndexJar": null,
+	    "hlavbseq.indexBam.jobMemory": 28,
+	    "hlavbseq.indexBam.modules": null,
+	    "hlavbseq.indexBam.overhead": null,
+	    "hlavbseq.indexBam.timeout": null,
+	    "hlavbseq.inputBai": {
                 "contents": {
-                    "configuration": "/.mounts/labs/gsi/testdata/hlavbseq/input_data/VARTEST.copynumber",
+                    "configuration": "/.mounts/labs/gsi/testdata/hlavbseq/input_data/HLAVBSEQ_TESTING.sorted.bam.bai",
                     "externalIds": [
                         {
                             "id": "TEST",
@@ -13,36 +66,9 @@
                 },
                 "type": "EXTERNAL"
             },
-            "hlavbseq.formatJson.height": null,
-            "hlavbseq.formatJson.jobMemory": 6,
-            "hlavbseq.formatJson.modules": null,
-            "hlavbseq.formatJson.rScript": null,
-            "hlavbseq.formatJson.hlavbseqRmd": null,
-            "hlavbseq.formatJson.summaryPlotScript": null,
-            "hlavbseq.formatJson.width": null,
-            "hlavbseq.gammaRange": null,
-            "hlavbseq.outputFileNamePrefix": "TESTING",
-            "hlavbseq.preprocessInputs.jobMemory": 4,
-            "hlavbseq.preprocessInputs.modules": null,
-            "hlavbseq.preprocessInputs.preprocessScript": null,
-            "hlavbseq.preprocessInputs.rScript": null,
-            "hlavbseq.preprocessInputs.timeout": null,
-            "hlavbseq.runSequenza.cancerType": null,
-            "hlavbseq.runSequenza.female": null,
-            "hlavbseq.runSequenza.genomeSize": null,
-            "hlavbseq.runSequenza.jobMemory": 6,
-            "hlavbseq.runSequenza.minReadsBaf": null,
-            "hlavbseq.runSequenza.minReadsNormal": null,
-            "hlavbseq.runSequenza.modules": null,
-            "hlavbseq.runSequenza.ploidyFile": "$SEQUENZA_RES_ROOT/PANCAN_ASCAT_ploidy_prob.Rdata",
-            "hlavbseq.runSequenza.rScript": null,
-            "hlavbseq.runSequenza.reference": null,
-            "hlavbseq.runSequenza.hlavbseqScript": null,
-            "hlavbseq.runSequenza.timeout": null,
-            "hlavbseq.runSequenza.windowSize": null,
-            "hlavbseq.snpFile": {
+	    "hlavbseq.inputBam": {
                 "contents": {
-                    "configuration": "/.mounts/labs/gsi/testdata/hlavbseq/input_data/VARTEST.snp",
+                    "configuration": "/.mounts/labs/gsi/testdata/hlavbseq/input_data/HLAVBSEQ_TESTING.sorted.bam",
                     "externalIds": [
                         {
                             "id": "TEST",
@@ -51,43 +77,53 @@
                     ]
                 },
                 "type": "EXTERNAL"
-            }
+            },
+	    "hlavbseq.makeFastq.bamNameIndexJar": null,
+	    "hlavbseq.makeFastq.jobMemory": null,
+	    "hlavbseq.makeFastq.modules": null,
+	    "hlavbseq.makeFastq.overhead": null,
+	    "hlavbseq.makeFastq.timeout": null,
+	    "hlavbseq.outputFileNamePrefix": "RT_OUTPUTS",
+	    "hlavbseq.parseResults.alleleFile": "$HLAVBSEQ_BWA_INDEX_ROOT/Allelelist.txt",
+	    "hlavbseq.parseResults.jobMemory": null,
+	    "hlavbseq.parseResults.modules": "hla-vbseq/1 hlavbseq-bwa-index/2.0",
+	    "hlavbseq.parseResults.parsingScript": "$HLA_VBSEQ_ROOT/bin/parse_result.pl",
+	    "hlavbseq.parseResults.timeout": null,
+	    "hlavbseq.runHlaVbSeq.alphaZero": null,
+	    "hlavbseq.runHlaVbSeq.hlaFasta": "$HLAVBSEQ_BWA_INDEX_ROOT/hla_all_v2.fasta",
+	    "hlavbseq.runHlaVbSeq.hlavbseqJar": "$HLA_VBSEQ_ROOT/bin/HLAVBSeq.jar",
+	    "hlavbseq.runHlaVbSeq.jobMemory": 32,
+	    "hlavbseq.runHlaVbSeq.modules": "hla-vbseq/1 hlavbseq-bwa-index/2.0",
+	    "hlavbseq.runHlaVbSeq.overhead": null,
+	    "hlavbseq.runHlaVbSeq.timeout": null
         },
-        "description": "Sequenza workflow test",
+        "description": "HLA-VBSeq workflow test",
         "engineArguments": {
            "write_to_cache": false,
            "read_from_cache": false
         },
-        "id": "VARSCAN_OUTPUTS_PCSI_CHR22",
+        "id": "RT_OUTPUTS",
         "metadata": {
-            "hlavbseq.gammaMarkdownPdf": {
+            "hlavbseq.hlaVbSeqresult": {
                 "contents": [
                     {
-                        "outputDirectory": "@SCRATCH@/@DATE@_Workflow_hlavbseq_VARSCAN_OUTPUTS_PCSI_CHR22_@JENKINSID@"
+                        "outputDirectory": "@SCRATCH@/@DATE@_Workflow_hlavbseq_RT_OUTPUTS_@JENKINSID@"
                     }
                 ],
                 "type": "ALL"
             },
-            "hlavbseq.gammaSummaryPlot": {
+            "hlavbseq.parsedResults": {
                 "contents": [
                     {
-                        "outputDirectory": "@SCRATCH@/@DATE@_Workflow_hlavbseq_VARSCAN_OUTPUTS_PCSI_CHR22_@JENKINSID@"
+                        "outputDirectory": "@SCRATCH@/@DATE@_Workflow_hlavbseq_RT_OUTPUTS_@JENKINSID@"
                     }
                 ],
                 "type": "ALL"
             },
-            "hlavbseq.resultJson": {
+            "hlavbseq.resultsFile": {
                 "contents": [
                     {
-                        "outputDirectory": "@SCRATCH@/@DATE@_Workflow_hlavbseq_VARSCAN_OUTPUTS_PCSI_CHR22_@JENKINSID@"
-                    }
-                ],
-                "type": "ALL"
-            },
-            "hlavbseq.resultZip": {
-                "contents": [
-                    {
-                        "outputDirectory": "@SCRATCH@/@DATE@_Workflow_hlavbseq_VARSCAN_OUTPUTS_PCSI_CHR22_@JENKINSID@"
+                        "outputDirectory": "@SCRATCH@/@DATE@_Workflow_hlavbseq_RT_OUTPUTS_@JENKINSID@"
                     }
                 ],
                 "type": "ALL"
@@ -97,7 +133,7 @@
             {
                 "metrics_calculate": "@CHECKOUT@/tests/calculate.sh",
                 "metrics_compare": "@CHECKOUT@/tests/compare.sh",
-                "output_metrics": "/.mounts/labs/gsi/testdata/hlavbseq/output_metrics/VARSCAN_OUTPUTS_PCSI_CHR22.metrics",
+                "output_metrics": "/.mounts/labs/gsi/testdata/hlavbseq/output_metrics/RT_OUTPUTS.metrics",
                 "type": "script"
             }
         ]
