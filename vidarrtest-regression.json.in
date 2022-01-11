@@ -33,7 +33,7 @@
 	    "hlavbseq.bwaMem.slicerR2_timeout": null,
 	    "hlavbseq.bwaMem.trimMinLength": null,
 	    "hlavbseq.bwaMem.trimMinQuality": null,
-	    "hlavbseq.bwa_threads": "8",
+	    "hlavbseq.bwa_threads": 8,
 	    "hlavbseq.callHlaDigits.alleleFile": "$HLAVBSEQ_BWA_INDEX_ROOT/Allelelist.txt",
 	    "hlavbseq.callHlaDigits.callingScript": "$HLA_VBSEQ_ROOT/bin/call_hla_digits.py",
 	    "hlavbseq.callHlaDigits.jobMemory": null,
