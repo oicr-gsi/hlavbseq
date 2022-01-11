@@ -117,81 +117,81 @@ Output | Type | Description
 
 
 ## Commands
- This section lists command(s) run by HLA-VBseq workflow
+This section lists command(s) run by HLA-VBseq workflow
  
- * Running HLA-VBseq
+* Running HLA-VBseq
  
- At this point, workflow uses a filtering step for alignments (removing secondary hits) which is not a part of the standard way to run this tool. It may be resolved in a future, but since the authors did not publish the source code it may require direct communication with them to clarify some issues. The workflow produces reports as expected, though filtering of reads may distort the assessment of HLA alleles.
+At this point, workflow uses a filtering step for alignments (removing secondary hits) which is not a part of the standard way to run this tool. It may be resolved in a future, but since the authors did not publish the source code it may require direct communication with them to clarify some issues. The workflow produces reports as expected, though filtering of reads may distort the assessment of HLA alleles.
  
 ### Extracting reads which overlap HLA alleles:
  
- ```
-  samtools view ~{inputBam} ~{hlaIntervals} | awk '{print $1}' | sort | uniq > ~{outputFileNamePrefix}_HLA-VBSeq_reads.txt
+```
+  samtools view INPUT_BAM HLA_INTERVALS | awk '{print $1}' | sort | uniq > [OUTPUT_PREFIX]_HLA-VBSeq_reads.txt
  
- ```
+```
  
 ### Indexing bam file with HLA-VBseq and extracting HLA reads into a .sam file
  
- ```
+```
   set -euo pipefail
   unset _JAVA_OPTIONS
   mkdir data
-  ln -s ~{inputBam} -t data
-  java -Xmx~{javaMemory}G -jar ~{bamNameIndexJar} index data/~{fileName}  --indexFile data/~{fileName}.idx
-  java -Xmx~{javaMemory}G -jar ~{bamNameIndexJar} search data/~{fileName} --name ~{hlaReads} --output ~{outputFileNamePrefix}_partial.sam
- ```
+  ln -s INPUT_BAM -t data
+  java -Xmx18G -jar BAM_NAME_INDEX_JAR index data/FILE_NAME  --indexFile data/FILE_NAME.idx
+  java -Xmx18G -jar BAM_NAME_INDEX_JAR search data/FILE_NAME --name HLA_READS --output [FILE_NAME]_partial.sam
+```
  
-### Extract reads into fastq files, both for HLA-specific and unmapped reads. Merge.
+### Extract reads into fastq files, both for HLA-specific and unmapped reads. Merge
  
- ```
+```
   set -euo pipefail
   unset _JAVA_OPTIONS
-  java -Xmx~{javaMemory}G -jar $PICARD_ROOT/picard.jar SamToFastq I=~{partialSam} F=PARTIAL_1.fastq F2=PARTIAL_2.fastq
-  samtools view -bh -f 12 ~{inputBam} > ~{outputFileNamePrefix}.sorted_unmapped.bam
-  java -Xmx~{javaMemory}G -jar $PICARD_ROOT/picard.jar SamToFastq I=~{outputFileNamePrefix}.sorted_unmapped.bam F=UNMAPPED_1.fastq F2=UNMAPPED_2.fastq
-  cat PARTIAL_1.fastq UNMAPPED_1.fastq | gzip -c > ~{outputFileNamePrefix}_part_1.fastq.gz
-  cat PARTIAL_2.fastq UNMAPPED_2.fastq | gzip -c > ~{outputFileNamePrefix}_part_2.fastq.gz
- 
- ```
+  java -Xmx24G -jar picard.jar SamToFastq I=PARTIAL_SAM F=PARTIAL_1.fastq F2=PARTIAL_2.fastq
+  samtools view -bh -f 12 INPUT_BAM > [FILE_NAME].sorted_unmapped.bam
+  java -Xmx24G -jar picard.jar SamToFastq I=[FILE_NAME].sorted_unmapped.bam F=UNMAPPED_1.fastq F2=UNMAPPED_2.fastq
+  cat PARTIAL_1.fastq UNMAPPED_1.fastq | gzip -c > [FILE_NAME]_part_1.fastq.gz
+  cat PARTIAL_2.fastq UNMAPPED_2.fastq | gzip -c > [FILE_NAME]_part_2.fastq.gz
+```
  
 ### Filter alignments (the default is to remove secondary alignments)
  
- ```
-  samtools view -h -F ~{filterTag} ~{inputBam} -b > ~{fBam}
- ```
+```
+  samtools view -h -F FILTER_TAG INPUT_BAM -b > FILTERED_BAM
+```
  
 ### Run the analysis with HLA-VBseq, call HLA alleles
  
- ```
+```
   set -euo pipefail
   unset _JAVA_OPTIONS
-  java -jar -Xmx~{javaMemory}g -Xms~{javaMemory}g ~{hlavbseqJar} \
-                            ~{hlaFasta} \
-                            ~{inputBam} \
-                            ~{outputFileNamePrefix}_HLA-VBSeq_results.txt  \
-                            --alpha_zero ~{alphaZero} \
+  java -jar -Xmx12g -Xms12g HLAVBSEQ_JAR \
+                            HLA_FASTA \
+                            INPUT_BAM \
+                            [FILE_NAME]_HLA-VBSeq_results.txt  \
+                            --alpha_zero ALPHA_ZERO \
                             --is_paired 
- ```
+```
 
-### Parse the raw results file
+### Parsing raw calls from HLA-VBseq
  
- ```
-  ~{parsingScript} ~{alleleFile} \
-                   ~{resultsFile} > \
-                   ~{outputFileNamePrefix}_HLA-VBSeq_prediction.txt
- ```
+```
+  ~{parsingScript} ALLELE_FILE \
+                   RESULTS_FILE > \
+                   [FILE_NAME]_HLA-VBSeq_prediction.txt
+```
  
-###Post-processing of the results
+### Post-processing of the results
  
- ```
-  python3 ~{callingScript} \
-      -v ~{resultsFile} \
-      -a ~{alleleFile} \
-      -r ~{meanReadLength} \
-      -d ~{resolution} \
+```
+  python3 CALLING_SCRIPT \
+      -v RESULTS_FILE \
+      -a ALLELE_FILE \
+      -r MEAN_READ_LENGTH \
+      -d RESOLUTION \
       --ispaired > \
-      ~{outputFileNamePrefix}_HLA-VBSeq_call.txt
- ```
+      [FILE_NAME]_HLA-VBSeq_call.txt
+```
+
 ## Support
 
 For support, please file an issue on the [Github project](https://github.com/oicr-gsi) or send an email to gsi@oicr.on.ca .
