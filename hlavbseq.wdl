@@ -214,6 +214,7 @@ input {
   File hlaReads
   String bamNameIndexJar = "$HLA_VBSEQ_ROOT/bin/bamNameIndex.jar"
   String outputFileNamePrefix
+  String picardParams = "VALIDATION_STRINGENCY=LENIENT"
   String modules = "samtools/1.9 picard/2.21.2"
 }
 
@@ -222,9 +223,9 @@ Int javaMemory = jobMemory - overhead
 command <<<
  set -euo pipefail
  unset _JAVA_OPTIONS
- java -Xmx~{javaMemory}G -jar $PICARD_ROOT/picard.jar SamToFastq I=~{partialSam} F=PARTIAL_1.fastq F2=PARTIAL_2.fastq
+ java -Xmx~{javaMemory}G -jar $PICARD_ROOT/picard.jar SamToFastq I=~{partialSam} F=PARTIAL_1.fastq F2=PARTIAL_2.fastq ~{picardParams}
  samtools view -bh -f 12 ~{inputBam} > ~{outputFileNamePrefix}.sorted_unmapped.bam
- java -Xmx~{javaMemory}G -jar $PICARD_ROOT/picard.jar SamToFastq I=~{outputFileNamePrefix}.sorted_unmapped.bam F=UNMAPPED_1.fastq F2=UNMAPPED_2.fastq
+ java -Xmx~{javaMemory}G -jar $PICARD_ROOT/picard.jar SamToFastq I=~{outputFileNamePrefix}.sorted_unmapped.bam F=UNMAPPED_1.fastq F2=UNMAPPED_2.fastq ~{picardParams}
  cat PARTIAL_1.fastq UNMAPPED_1.fastq | gzip -c > ~{outputFileNamePrefix}_part_1.fastq.gz
  cat PARTIAL_2.fastq UNMAPPED_2.fastq | gzip -c > ~{outputFileNamePrefix}_part_2.fastq.gz
 
@@ -237,6 +238,7 @@ parameter_meta {
  outputFileNamePrefix: "Output prefix for the result file"
  jobMemory: "Memory allocated to the task."
  overhead: "Ovrerhead for calculating heap memory, difference between total and Java-allocated memory"
+ picardParams: "Additional parameters for picard SamToFastq, Default is VALIDATION_STRINGENCY=LENIENT"
  modules: "Names and versions of required modules."
  timeout: "Timeout in hours, needed to override imposed limits."
 }
@@ -399,7 +401,7 @@ input {
   String callingScript = "$HLA_VBSEQ_ROOT/bin/call_hla_digits.py"
   String alleleFile = "$HLAVBSEQ_BWA_INDEX_ROOT/Allelelist.txt"
   String outputFileNamePrefix
-  String modules = "hlavbseq/1 hlaminer-bwa-index/0.7.17"
+  String modules = "hla-vbseq/1 hlavbseq-bwa-index/2.0"
 }
 
 command <<<
