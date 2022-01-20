@@ -79,6 +79,7 @@
                 "type": "EXTERNAL"
             },
 	    "hlavbseq.makeFastq.bamNameIndexJar": null,
+            "hlavbseq.makeFastq.picardParams": null,
 	    "hlavbseq.makeFastq.jobMemory": null,
 	    "hlavbseq.makeFastq.modules": null,
 	    "hlavbseq.makeFastq.overhead": null,

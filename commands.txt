@@ -5,14 +5,14 @@ This section lists command(s) run by HLA-VBseq workflow
 
 At this point, workflow uses a filtering step for alignments (removing secondary hits) which is not a part of the standard way to run this tool. It may be resolved in a future, but since the authors did not publish the source code it may require direct communication with them to clarify some issues. The workflow produces reports as expected, though filtering of reads may distort the assessment of HLA alleles.
 
-###Extracting reads which overlap HLA alleles:
+### Extracting reads which overlap HLA alleles:
 
 ```
  samtools view INPUT_BAM HLA_INTERVALS | awk '{print $1}' | sort | uniq > [OUTPUT_PREFIX]_HLA-VBSeq_reads.txt
 
 ```
 
-###Indexing bam file with HLA-VBseq and extracting HLA reads into a .sam file
+### Indexing bam file with HLA-VBseq and extracting HLA reads into a .sam file
 
 ```
  set -euo pipefail
@@ -23,7 +23,7 @@ At this point, workflow uses a filtering step for alignments (removing secondary
  java -Xmx18G -jar BAM_NAME_INDEX_JAR search data/FILE_NAME --name HLA_READS --output [FILE_NAME]_partial.sam
 ```
 
-###Extract reads into fastq files, both for HLA-specific and unmapped reads. Merge.
+### Extract reads into fastq files, both for HLA-specific and unmapped reads. Merge.
 
 ```
  set -euo pipefail
@@ -36,13 +36,13 @@ At this point, workflow uses a filtering step for alignments (removing secondary
 
 ```
 
-###Filter alignments (the default is to remove secondary alignments)
+### Filter alignments (the default is to remove secondary alignments)
 
 ```
  samtools view -h -F FILTER_TAG INPUT_BAM -b > FILTERED_BAM
 ```
 
-###Run the analysis with HLA-VBseq, call HLA alleles
+### Run the analysis with HLA-VBseq, call HLA alleles
 
 ```
  set -euo pipefail
@@ -54,7 +54,7 @@ At this point, workflow uses a filtering step for alignments (removing secondary
                            --alpha_zero ALPHA_ZERO \
                            --is_paired 
 ```
-###Parsing raw calls from HLA-VBseq
+### Parsing raw calls from HLA-VBseq
 
 ```
  ~{parsingScript} ALLELE_FILE \
@@ -62,7 +62,7 @@ At this point, workflow uses a filtering step for alignments (removing secondary
                   [FILE_NAME]_HLA-VBSeq_prediction.txt
 ```
 
-###Post-processing of the results
+### Post-processing of the results
 
 ```
  python3 CALLING_SCRIPT \

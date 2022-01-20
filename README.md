@@ -54,6 +54,7 @@ Parameter|Value|Default|Description
 `makeFastq.overhead`|Int|6|Ovrerhead for calculating heap memory, difference between total and Java-allocated memory
 `makeFastq.timeout`|Int|20|Timeout in hours, needed to override imposed limits.
 `makeFastq.bamNameIndexJar`|String|"$HLA_VBSEQ_ROOT/bin/bamNameIndex.jar"|Jar file for bamNameInder
+`makeFastq.picardParams`|String|"VALIDATION_STRINGENCY=LENIENT"|Additional parameters for picard SamToFastq, Default is VALIDATION_STRINGENCY=LENIENT
 `makeFastq.modules`|String|"samtools/1.9 picard/2.21.2"|Names and versions of required modules.
 `bwaMem.adapterTrimmingLog_timeout`|Int|48|Hours before task timeout
 `bwaMem.adapterTrimmingLog_jobMemory`|Int|12|Memory allocated indexing job
@@ -104,7 +105,7 @@ Parameter|Value|Default|Description
 `callHlaDigits.resolution`|Int|4|Resolution for HLA allele may be 4, 6 or 8
 `callHlaDigits.callingScript`|String|"$HLA_VBSEQ_ROOT/bin/call_hla_digits.py"|Path to the HLA allele calling script
 `callHlaDigits.alleleFile`|String|"$HLAVBSEQ_BWA_INDEX_ROOT/Allelelist.txt"|File with allele information
-`callHlaDigits.modules`|String|"hlavbseq/1 hlaminer-bwa-index/0.7.17"|Names and versions of required modules.
+`callHlaDigits.modules`|String|"hla-vbseq/1 hlavbseq-bwa-index/2.0"|Names and versions of required modules.
 
 
 ### Outputs
