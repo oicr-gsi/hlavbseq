@@ -98,10 +98,19 @@ meta {
       }
     ]
     output_meta: {
-      hlaVbSeqresult: "Results as they come from the tool, all HLA alleles are listed",
-      parsedResults: "Parsed Results, HLA alleles with non-zero signal",
-      resultsFile: "File with the final HLA Allele calls"
+    hlaVbSeqresult: {
+        description: "Results as they come from the tool, all HLA alleles are listed",
+        vidarr_label: "hlaVbSeqresult"
+    },
+    parsedResults: {
+        description: "Parsed Results, HLA alleles with non-zero signal",
+        vidarr_label: "parsedResults"
+    },
+    resultsFile: {
+        description: "File with the final HLA Allele calls",
+        vidarr_label: "resultsFile"
     }
+}
 }
 
 output {

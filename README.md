@@ -110,11 +110,11 @@ Parameter|Value|Default|Description
 
 ### Outputs
 
-Output | Type | Description
----|---|---
-`hlaVbSeqresult`|File|Results as they come from the tool, all HLA alleles are listed
-`parsedResults`|File|Parsed Results, HLA alleles with non-zero signal
-`resultsFile`|File|File with the final HLA Allele calls
+Output | Type | Description | Labels
+---|---|---|---
+`hlaVbSeqresult`|File|Results as they come from the tool, all HLA alleles are listed|vidarr_label: hlaVbSeqresult
+`parsedResults`|File|Parsed Results, HLA alleles with non-zero signal|vidarr_label: parsedResults
+`resultsFile`|File|File with the final HLA Allele calls|vidarr_label: resultsFile
 
 
 ## Commands
