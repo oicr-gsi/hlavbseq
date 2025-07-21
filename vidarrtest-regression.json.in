@@ -56,7 +56,7 @@
 	    "hlavbseq.indexBam.timeout": null,
 	    "hlavbseq.inputBai": {
                 "contents": {
-                    "configuration": "/.mounts/labs/gsi/testdata/hlavbseq/input_data/HLAVBSEQ_TESTING.sorted.bam.bai",
+                    "configuration": "/.mounts/labs/gsi/testdata/hlavbseq/test_inputs/Test01.sorted.bam.bai",
                     "externalIds": [
                         {
                             "id": "TEST",
@@ -68,7 +68,7 @@
             },
 	    "hlavbseq.inputBam": {
                 "contents": {
-                    "configuration": "/.mounts/labs/gsi/testdata/hlavbseq/input_data/HLAVBSEQ_TESTING.sorted.bam",
+                    "configuration": "/.mounts/labs/gsi/testdata/hlavbseq/test_inputs/Test01.sorted.bam",
                     "externalIds": [
                         {
                             "id": "TEST",
@@ -134,7 +134,7 @@
             {
                 "metrics_calculate": "@CHECKOUT@/tests/calculate.sh",
                 "metrics_compare": "@CHECKOUT@/tests/compare.sh",
-                "output_metrics": "/.mounts/labs/gsi/testdata/hlavbseq/output_metrics/RT_OUTPUTS.metrics",
+                "output_metrics": "/.mounts/labs/gsi/testdata/hlavbseq/output_metrics/workflow_test_01.metrics",
                 "type": "script"
             }
         ]
